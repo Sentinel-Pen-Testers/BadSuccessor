@@ -19,7 +19,7 @@ Akamai researcher Yuval Gordon discovered BadSuccessor and published a very comp
 ## 📦 Installation
 
 ```bash
-pipx install https://github.com/Sentinel-Pen-Testers/BadSuccessor
+pipx install git+https://github.com/Sentinel-Pen-Testers/BadSuccessor
 ```
 Alternatively, the script can be run directly, as long as the Python library *ldap3* is installed.
 
