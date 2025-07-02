@@ -1,0 +1,1 @@
+from .BadSuccessor import main
