@@ -9,7 +9,7 @@ dependencies = [
 ]
 
 [project.scripts]
-BadSuccessor = "BadSuccessor:main"
+BadSuccessor = "BadSuccessor.BadSuccessor:main"
 
 [tool.setuptools]
 include-package-data = true
