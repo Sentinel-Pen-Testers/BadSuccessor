@@ -1,7 +1,7 @@
 [project]
 name = "BadSuccessor"
 version = "1.0.0"
-description = "Delegated MSA Utility Tool for Active Directory pentesting"
+description = "dMSA abuse for privilege elevation"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = ["ldap3"]
