@@ -5,7 +5,7 @@ This script automates the exploitation of the BadSuccessor vulnerability, and ca
 
 Akamai researcher Yuval Gordon discovered BadSuccessor and published a very comprehensive explaination of the vulnerability ([More Reading](https://www.akamai.com/blog/security-research/abusing-dmsa-for-privilege-escalation-in-active-directory#conclusion)). This script is not intended to replace or take credit for Yuval's work. Instead, this script automates all of the steps involved in exploiting BadSuccessor and also allows exploitation from a host that is not domain-joined. 
 
-![img.png](img.png)
+![Example](IMAGES/example.png)
 
 ## 🧰 Requirements
 
