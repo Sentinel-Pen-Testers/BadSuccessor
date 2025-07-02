@@ -4,18 +4,14 @@ version = "1.0.0"
 description = "Delegated MSA Utility Tool for Active Directory pentesting"
 readme = "README.md"
 requires-python = ">=3.8"
-dependencies = [
-    "ldap3"
-]
+dependencies = ["ldap3"]
 
 [project.scripts]
 BadSuccessor = "BadSuccessor:main"
 
 [tool.setuptools]
+py-modules = ["BadSuccessor"]
 include-package-data = true
 
 [tool.setuptools.package-data]
-"" = ["Rubeus.exe"]
-
-[tool.setuptools.packages.find]
-where = ["BadSuccessor"]
+BadSuccessor = ["Rubeus.exe"]
