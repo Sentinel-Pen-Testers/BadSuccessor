@@ -16,3 +16,6 @@ include-package-data = true
 
 [tool.setuptools.package-data]
 "BadSuccessor" = ["Rubeus.exe"]
+
+[tool.setuptools.packages.find]
+where = ["BadSuccessor"]
